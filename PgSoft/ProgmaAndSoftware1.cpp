@@ -87,6 +87,7 @@ void LinearList::Sort()
 	}
 }
 
+//直接插入到list末尾，而后重新排序
 void LinearList::Insert(int n)
 {
 	if (this->Length >= 15) //if linear list is full
@@ -99,6 +100,7 @@ void LinearList::Insert(int n)
 	this->Sort();
 }
 
+//依次比对，找到第一个相同数据，以此为基准让后续元素迁移一个单位
 void LinearList::Delete(int n)
 {
 	if (this->Length <= 0) //if linear list is empty
