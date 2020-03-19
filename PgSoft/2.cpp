@@ -14,7 +14,7 @@ const char priority[][2] = { {'^', 3}, {'*', 2}, {'/', 2}, {'+', 1}, {'-', 1}, {
 //if a's priority is higher than b, return true
 bool compare_prio(char, char);
 //judge
-inline bool isNum(char ch) {return (ch >= '0' && ch <= '9');};
+inline bool isNum(char ch) {return (ch >= '0' && ch <= '9');}
 
 void compute(char *, char *op, char *, char *exp);
 
@@ -37,10 +37,10 @@ class Stack
 public:
 	char nStack[MAX_SIZE][MAX_LEN]{ '\0' };
 	unsigned top;
-	Stack() { this->top = 0; };
+	Stack() { this->top = 0; }
 	char * PushStack(char []);
 	char * PopStack(char []);
-	char GetTop() const { return this->nStack[this->top - 1][0]; };
+	char GetTop() const { return this->nStack[this->top - 1][0]; }
 };
 
 int main()
