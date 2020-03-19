@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int MAX_LEN = 20;		
+const int MAX_LEN = 30;		
 const int MAX_SIZE = 30;
 
 //Priority list
@@ -14,7 +14,7 @@ char priority[][2] = { {'^', 3}, {'*', 2}, {'/', 2}, {'+', 1}, {'-', 1}, {';', 0
 //if a's priority is higher than b, return true
 bool compare_prio(char, char);
 //judge
-bool isNum(char, int *);
+bool isNum(char);
 
 void compute(char *, char *op, char *, char *exp);
 
@@ -40,17 +40,17 @@ public:
 	Stack();
 	char * PushStack(char []);
 	char * PopStack(char []);
-	char GetTop();
+	char GetTop() const;
 };
 
 int main()
 {
 	char exp[MAX_LEN]{ '\0' }, x[MAX_LEN]{ '\0' };
 	char n1[MAX_LEN]{ '\0' }, n2[MAX_LEN]{ '\0' }, op[MAX_LEN]{ '\0' };
-	int num;
 	bool cmflag = false;
 	Queue expression = Queue();
 	Stack NS = Stack(), OS = Stack();
+	cout << "\n\tinput a expression:\n\n\t";
 	cin.getline(exp, MAX_LEN);
 
 	preDealexpression(exp); //处理字符串
@@ -69,12 +69,10 @@ int main()
 		if (!cmflag)  //如果没有进行出栈则继续出队
 		{
 			expression.OutQueue(exp);
-			cmflag = false;
 		}
-		if (isNum(exp[0], &num))
+		if (isNum(exp[0]))
 		{
 			NS.PushStack(exp);
-			continue;
 		}
 		else
 		{
@@ -86,7 +84,6 @@ int main()
 			else if (exp[0] == ';' && OS.top == 1)
 			{
 				NS.PopStack(x);
-				cmflag = false;
 				break;
 			}
 			else
@@ -98,7 +95,7 @@ int main()
 		}
 	}
 
-	cout << x << endl;
+	cout << "\n\tresult is " << x << endl << endl;
 
 	system("pause");
 	return 0;
@@ -121,18 +118,9 @@ bool compare_prio(char a, char b)
 }
 
 //判断是不是数字，是则true， 否则false且num = NULL
-bool isNum(char ch, int *num)
+bool isNum(char ch)
 {
-	if (ch >= '0' && ch <= '9')
-	{
-		*num = ch - '0';
-		return true;
-	}
-	else
-	{
-		num = NULL;
-		return false;
-	}
+	return (ch >= '0' && ch <= '9');
 }
 
 void compute(char *n1, char *op, char *n2, char *exp)
@@ -154,7 +142,7 @@ void compute(char *n1, char *op, char *n2, char *exp)
 				break;
 	default:	break;
 	}
-	sprintf_s(exp, MAX_LEN, "%.4f", re);
+	sprintf_s(exp, MAX_LEN, "%g", re);
 }
 
 Queue::Queue()
@@ -166,7 +154,7 @@ Queue::Queue()
 
 void preDealexpression(char str[])
 {
-	char mid[30]{'\0'};
+	char mid[MAX_LEN]{'\0'};
 	for (int i = 0, j = 0; str[i] != '\0'; i++)
 	{
 		if (str[i] != ' ')
@@ -179,7 +167,7 @@ void preDealexpression(char str[])
 			}
 		}	
 	}
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < MAX_LEN; i++)
 	{
 		str[i] = mid[i];
 	}
@@ -228,7 +216,6 @@ char * Stack::PushStack(char item[])
 	return item;
 }
 
-
 char * Stack::PopStack(char item[])
 {
 	if (this->top <= 0)
@@ -242,8 +229,7 @@ char * Stack::PopStack(char item[])
 	return item;
 }
 
-char Stack::GetTop()
+char Stack::GetTop() const
 {
 	return this->nStack[this->top - 1][0];
 }
-
