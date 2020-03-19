@@ -10,11 +10,11 @@ const int MAX_LEN = 30;
 const int MAX_SIZE = 30;
 
 //Priority list
-char priority[][2] = { {'^', 3}, {'*', 2}, {'/', 2}, {'+', 1}, {'-', 1}, {';', 0} };
+const char priority[][2] = { {'^', 3}, {'*', 2}, {'/', 2}, {'+', 1}, {'-', 1}, {';', 0} };
 //if a's priority is higher than b, return true
 bool compare_prio(char, char);
 //judge
-bool isNum(char);
+inline bool isNum(char ch) {return (ch >= '0' && ch <= '9');};
 
 void compute(char *, char *op, char *, char *exp);
 
@@ -37,10 +37,10 @@ class Stack
 public:
 	char nStack[MAX_SIZE][MAX_LEN]{ '\0' };
 	unsigned top;
-	Stack();
+	Stack() { this->top = 0; };
 	char * PushStack(char []);
 	char * PopStack(char []);
-	char GetTop() const;
+	char GetTop() const { return this->nStack[this->top - 1][0]; };
 };
 
 int main()
@@ -115,12 +115,6 @@ bool compare_prio(char a, char b)
 		}
 	}
 	return (a > b);
-}
-
-//判断是不是数字，是则true， 否则false且num = NULL
-bool isNum(char ch)
-{
-	return (ch >= '0' && ch <= '9');
 }
 
 void compute(char *n1, char *op, char *n2, char *exp)
@@ -199,11 +193,6 @@ void Queue::OutQueue(char item[])
 	this->count--;
 }
 
-Stack::Stack()
-{
-	this->top = 0;
-}
-
 char * Stack::PushStack(char item[])
 {
 	if (this->top >= MAX_SIZE)
@@ -227,9 +216,4 @@ char * Stack::PopStack(char item[])
 	this->top--;
 
 	return item;
-}
-
-char Stack::GetTop() const
-{
-	return this->nStack[this->top - 1][0];
 }
