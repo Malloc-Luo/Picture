@@ -1,26 +1,30 @@
-// ProgmaAndSoftware1.cpp : 定义控制台应用程序的入口点。
-//
-
+//update : try to use operator reload @yuqi Li
 #include "stdafx.h"
 #include "stdlib.h"
 #include <iostream>
-
 using namespace std;
 
-const int nMaxSize = 15;	
+const int nMaxSize = 15;
 
 class LinearList
 {
-public:
 	unsigned Length;   //记录当前长度
 	int List[nMaxSize];
+public:
+	
+	//normal
+	LinearList();
 	void Sort();
 	void Out();
-	void Insert(int );
-	void Delete(int );
-	LinearList();
-};
+	void Insert(int);
+	void Delete(int);
 
+	//reload operator
+	void operator >> (int);
+	void operator << (int);
+	friend ostream & operator << (ostream & os, const LinearList &);
+	int operator [] (int n) const; //索引
+};
 
 int main()
 {
@@ -29,16 +33,19 @@ int main()
 
 	cout << "\tinsert a data:\n\n";
 	cin >> opdata;
-	mylist.Insert(opdata);
-	mylist.Out();
+//	mylist.Insert(opdata);
+	mylist >> opdata;
+//	mylist.Out();
+	cout << mylist;
 
 	cout << "\tdelete a data:\n\n";
 	cin >> opdata;
-	mylist.Delete(opdata);
-	mylist.Out();
+//	mylist.Delete(opdata);
+	mylist << opdata;
+//	mylist.Out();
+	cout << mylist;
 
-	cin.get();
-	cin.get();
+	system("pause");
 	return 0;
 }
 
@@ -53,7 +60,8 @@ LinearList::LinearList()
 		this->Length++;
 	}
 	this->Sort();
-	this->Out();
+//	this->Out();
+	cout << *this;
 }
 
 void LinearList::Out()
@@ -69,7 +77,7 @@ void LinearList::Out()
 }
 
 //选择排序算法(Selection sort)
-void LinearList::Sort()  
+void LinearList::Sort()
 {
 	int mid;
 
@@ -121,7 +129,59 @@ void LinearList::Delete(int n)
 			return;
 		}
 	}
-	//don` t have data n
 	cout << "no data is " << n << ", fail to delete!\n";
 }
 
+//overload operator Vision
+
+void LinearList::operator >> (int item)
+{
+	if (this->Length >= 15) //if linear list is full
+	{
+		cout << "\tlinear list is full, fail to inster!\n\n";
+		return;
+	}
+
+	this->List[this->Length++] = item;
+	this->Sort();
+}
+
+void LinearList::operator << (int item)
+{
+	if (this->Length <= 0) //if linear list is empty
+	{
+		cout << "\tlinear list is empty, fail to delete!\n\n";
+		return;
+	}
+
+	for (int i = 0; i < this->Length; i++)
+	{
+		if (this->List[i] == item)
+		{
+			for (int j = i; j < this->Length - 1; j++)
+			{
+				this->List[j] = this->List[j + 1];
+			}
+			this->Length--;
+			return;
+		}
+	}
+	//don` t have data n
+	cout << "no data is " << item << ", fail to delete!\n";
+}
+
+ostream & operator << (ostream & os, const LinearList & list)
+{
+	for (int i = 0; i < list.Length; i++)
+	{
+		os << list.List[i] << " _ ";
+	}
+	os << endl;
+
+	return os;
+}
+
+inline int LinearList::operator [] (int n) const
+{
+	return n >= 0 ? this->List[n] : this->List[this->Length + n];
+}
