@@ -39,18 +39,21 @@ def SelfRule(rule):
 
 def d(name):
 	Name.remove(name)
+	
+def a(name):
+	Name.append(name)
 
 print('少人吗？[ y/ n/ 少/ 不少/]')
 isLack = input('\n\t: ')
 
 while isLack in ['y', '少', 'shao', 'sao', '烧', '骚', 'Y', '有', '一']:
 	try:
-		eval(input('\n用 d(name) 删掉那个人，比如 d(\'谦总\')，如果选错了使用 d(\' \')\n\n\t: '))
+		eval(input('\n用 d(name) 临时删人，如 d(\'谦总\'); 用 a(name) 临时加人，如 a(\'谦总\'); 若选错了使用 d(\' \')\n\n\t: '))
 		if ' ' not in Name:
 			break
 	except:
 		print(Name, '\n\n')
-		eval(input('\n名字好像打错了~重新来\n\n\t: '))
+		eval(input('\n名字好像打错了，重新来\n\n\t: '))
 	finally:
 		isLack = input('\n还少吗？\n\n\t: ')
 
