@@ -12,7 +12,7 @@ const int nMaxSize = 15;
 
 class LinearList
 {
-	unsigned Length;   //¼ÇÂ¼µ±Ç°³¤¶È
+	unsigned Length;   //è®°å½•å½“å‰é•¿åº¦
 	int List[nMaxSize];
 public:
 	
@@ -27,7 +27,7 @@ public:
 	void operator >> (int);
 	void operator << (int);
 	friend ostream & operator << (ostream & os, const LinearList &);
-	int operator [] (int n) const; //Ë÷Òý
+	int operator [] (int n) const; //ç´¢å¼•
 };
 
 int main()
@@ -80,7 +80,7 @@ void LinearList::Out()
 	cout << endl;
 }
 
-//Ñ¡ÔñÅÅÐòËã·¨(Selection sort)
+//é€‰æ‹©æŽ’åºç®—æ³•(Selection sort)
 void LinearList::Sort()
 {
 	int mid;
@@ -99,7 +99,7 @@ void LinearList::Sort()
 	}
 }
 
-//Ö±½Ó²åÈëµ½listÄ©Î²£¬¶øºóÖØÐÂÅÅÐò
+//ç›´æŽ¥æ’å…¥åˆ°listæœ«å°¾ï¼Œè€ŒåŽé‡æ–°æŽ’åº
 void LinearList::Insert(int n)
 {
 	if (this->Length >= 15) //if linear list is full
@@ -112,7 +112,7 @@ void LinearList::Insert(int n)
 	this->Sort();
 }
 
-//ÒÀ´Î±È¶Ô£¬ÕÒµ½µÚÒ»¸öÏàÍ¬Êý¾Ý£¬ÒÔ´ËÎª»ù×¼ÈÃºóÐøÔªËØÇ¨ÒÆÒ»¸öµ¥Î»
+//ä¾æ¬¡æ¯”å¯¹ï¼Œæ‰¾åˆ°ç¬¬ä¸€ä¸ªç›¸åŒæ•°æ®ï¼Œä»¥æ­¤ä¸ºåŸºå‡†è®©åŽç»­å…ƒç´ è¿ç§»ä¸€ä¸ªå•ä½
 void LinearList::Delete(int n)
 {
 	if (this->Length <= 0) //if linear list is empty
@@ -136,7 +136,7 @@ void LinearList::Delete(int n)
 	cout << "no data is " << n << ", fail to delete!\n";
 }
 
-//overload operator Vision
+//reload operator Vision
 
 void LinearList::operator >> (int item)
 {
