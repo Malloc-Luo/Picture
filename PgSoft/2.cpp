@@ -1,3 +1,7 @@
+/****
+ * @yuqi Li
+ * @IDE : visual studio 2015
+ */
 #include "stdafx.h"
 #include <stdlib.h>
 #include <iostream>
@@ -13,7 +17,7 @@ const int MAX_SIZE = 30;
 const char priority[][2] = { {'^', 3}, {'*', 2}, {'/', 2}, {'+', 1}, {'-', 1}, {';', 0} };
 //if a's priority is higher than b, return true
 bool compare_prio(char, char);
-//judge
+
 inline bool isNum(char ch) {return (ch >= '0' && ch <= '9');}
 
 void compute(char *, char *op, char *, char *exp);
@@ -45,15 +49,16 @@ public:
 
 int main()
 {
-	char exp[MAX_LEN]{ '\0' }, x[MAX_LEN]{ '\0' };
-	char n1[MAX_LEN]{ '\0' }, n2[MAX_LEN]{ '\0' }, op[MAX_LEN]{ '\0' };
+	char exp[MAX_LEN]{ '\0' }, x[MAX_LEN]{ '\0' }, n1[MAX_LEN]{ '\0' }, n2[MAX_LEN]{ '\0' }, op[MAX_LEN]{ '\0' };
 	bool cmflag = false;
-	Queue expression = Queue();
-	Stack NS = Stack(), OS = Stack();
+	
+	Queue expression = Queue();		  //expression queue
+	Stack NS = Stack(), OS = Stack(); //operator and number stacks
+	
 	cout << "\n\tinput a expression:\n\n\t";
 	cin.getline(exp, MAX_LEN);
 
-	preDealexpression(exp); //处理字符串
+	preDealexpression(exp); //handle expression string
 
 	//字符串表达式入队
 	for (int i = 0; i < MAX_LEN; i++)

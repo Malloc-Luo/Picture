@@ -1,4 +1,8 @@
-//update : try to use operator reload @yuqi Li
+/****
+ * @yuqi Li
+ * @update : try to use operator reload
+ * @IDE : visual studio 2015
+ */
 #include "stdafx.h"
 #include "stdlib.h"
 #include <iostream>
