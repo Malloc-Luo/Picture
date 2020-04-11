@@ -27,6 +27,7 @@ MyUrl = ["SCU90245T00180f90cbc0e776a748f7bd2b0d549a5e735cee58ca4",
 		"SCU89175Tb0d12fcc250b7e3dfe9ebe29fd20acb05e6b786f493a3"]
 
 title = '土豆条水分专用'
+gameName = ''
 msg = ''
 result = []
 group = '土豆条电控水群'
@@ -53,9 +54,9 @@ def d(name):
 	
 def a(name):
 	Name.append(name)
-	
-print('少人吗？[ y/ n/ 少/ 不少/ 多/]')
-isLack = input('\n\t: ')
+
+gameName = input('比赛叫什么名字？\n\t')	
+isLack = input('少人吗？[ y/ n/ 少/ 不少/ 多/]\n\t: ')
 
 while isLack in ['y', '少', 'shao', 'sao', '烧', '骚', 'Y', '有', '一', '多', 'duo']:
 	try:
@@ -78,7 +79,7 @@ for item in result:
     msg = msg + info + ' ; '
 
 for u in MyUrl:
-    rq.get('https://sc.ftqq.com/' + u + '.send', params = dict(text = title, desp = msg))
+    rq.get('https://sc.ftqq.com/' + u + '.send', params = dict(text = title + '-' + gameName, desp = msg))
 
 #os.system('qq send group ' + group + ' ' + info)
      
