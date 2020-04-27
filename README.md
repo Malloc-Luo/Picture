@@ -4,9 +4,7 @@
 
 
 
-![Kumaki Anri](https://github.com/Malloc-Luo/Picture/blob/master/1/kumaki_head.jpg)
+![kumaki_head.jpg](http://ww1.sinaimg.cn/mw690/007pWD8Ply1ge88z9yitwj30hs0h3wg2.jpg)
 
-![Yang Chaoyue](https://github.com/Malloc-Luo/Picture/blob/master/1/186-5.jpg)
-
-
+![186-5.jpg](http://ww1.sinaimg.cn/mw690/007pWD8Ply1ge88yex1ruj30u016gjyi.jpg)
 
