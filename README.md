@@ -6,5 +6,7 @@
 
 ![Kumaki Anri](https://github.com/Malloc-Luo/Picture/blob/master/1/kumaki_head.jpg)
 
+![Yang Chaoyue](https://github.com/Malloc-Luo/Picture/blob/master/1/186-5.jpg)
+
 
 
