@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Score
 USE MyDB;
 
 -- 向stu中插入数据
-INSERT INTO Stu(Sno, Sname, Gender, Age, Brithday, theClass)
+INSERT INTO Stu(Sno, Sname, Gender, Age, Birthday, theClass)
 	VALUES	('0101', '张强', '男', 20, '2000-2-20', '电子01班'),
 			('0102', '李红', '女', 20, '2000-8-10', '电子01班'),
 			('0103', '王涛', '男', 21, '1999-5-18', '电子01班'),
@@ -98,8 +98,28 @@ WHERE Score.Sno = Stu.Sno
 	AND Score.Grade < 60;
 
 -- 求学生的平均成绩和总成绩
+SELECT stu.Sname, PJCJ, ZCJ
+FROM
+	(SELECT score.Sno, AVG(score.Grade) as PJCJ, SUM(score.Grade) as ZCJ
+	FROM score
+	GROUP BY score.Sno) as pr, stu
+WHERE stu.Sno = pr.Sno;
 
 -- 查找各科成绩都 >= 85 分的学生
+SELECT stu.Sname, stu.theClass
+FROM
+	(SELECT score.Sno, score.Grade
+	FROM score
+	WHERE score.Cno = '01') AS mtb1,
+	(SELECT score.Sno, score.Grade
+	FROM score
+	WHERE score.Cno = '01') AS mtb2,
+	stu
+WHERE
+	mtb1.Sno = stu.Sno
+	AND stu.Sno = mtb2.Sno
+	AND mtb1.Grade >= 85
+	AND mtb2.Grade >= 85;
 
 -- 将课程号为“01”的课程名称修改为“软件技术”；
 UPDATE Course
@@ -130,12 +150,11 @@ FROM Stu, Course, Score
 WHERE Stu.Sno = Score.Sno 
 	AND Score.Cno = Course.Cno;
 
-	
 
 -- 删除01年以后、99年以前出生的学生的所有信息(包括选课和成绩)；
-DELETE 
-FROM 	Stu 
-WHERE 	Birthday > '2000-12-31' OR Birthday < '2000-1-1';
+DELETE
+FROM stu
+WHERE stu.Birthday NOT BETWEEN '1999-01-01' AND '2000-12-31'; 
 
 -- 删除一个班级的所有学生；
 DELETE 
