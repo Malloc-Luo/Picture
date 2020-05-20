@@ -7,7 +7,6 @@ import random as rd
 
 buy = []
 
-
 def Select(front = 5, back = 2, group = 1):
 	
 	front = front if front >= 5 or front <= 35 else 5

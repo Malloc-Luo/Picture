@@ -245,7 +245,6 @@ void displayUser(MFD *mfd)
 Map * queryUser(char userName[], MFD *mfd)
 {
 	Map *m = mfd->head;
-
 	while (m)
 	{
 		if (strcmp(userName, m->userName) == 0)
