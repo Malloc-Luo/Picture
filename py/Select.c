@@ -13,6 +13,8 @@ typedef struct
     int b;
 }Ticket;
 
+const char TicketFile[] = "ticket.txt";
+
 Ticket * generate_number(int f, int b);
 
 struct tm get_time();
@@ -74,7 +76,7 @@ int main()
     }
     unsigned money = expection(frontN, backN, groupN);
 
-    FILE * f = fopen("ticket.txt", "a+");
+    FILE * f = fopen(TicketFile, "a+");
     fprintf(f, "\n\n\t需要花费%d元", 2 * money);
     fclose(f);
 
@@ -97,7 +99,7 @@ int main()
     cmd = getch();
     if (cmd == 'v')
     {
-        system("ticket.txt");
+        system(TicketFile);
     }
 
     return 0;
@@ -106,7 +108,6 @@ int main()
 Ticket * generate_number(int f, int b)
 {
     Ticket * m = (Ticket *)malloc(sizeof(Ticket));
-
     m->front = (unsigned *)malloc(sizeof(int ) * f);
     m->back = (unsigned *)malloc(sizeof(int ) * b);
 
@@ -124,7 +125,7 @@ Ticket * generate_number(int f, int b)
         int j = 0;
         while (j < len[i])
         {
-            srand((unsigned)rand());
+            srand(time(NULL)% rand() + rand());
             int temp = rand() % (i == 0 ? 35 : 12) + 1;
 
             if (! findin(array[i], len[i], temp))
@@ -141,7 +142,7 @@ Ticket * generate_number(int f, int b)
 
 void timestamp()
 {
-    FILE * f = fopen("ticket.txt", "w");
+    FILE * f = fopen(TicketFile, "w");
     struct tm time_now = get_time();
     fprintf(stdout, "\n>%4d-%02d-%02d %02d:%02d:%02d >\n", time_now.tm_year + 1900, time_now.tm_mon + 1, time_now.tm_mday, time_now.tm_hour, time_now.tm_min, time_now.tm_sec);
     fprintf(f, "\n>%4d-%02d-%02d %02d:%02d:%02d >\n", time_now.tm_year + 1900, time_now.tm_mon + 1, time_now.tm_mday, time_now.tm_hour, time_now.tm_min, time_now.tm_sec);
@@ -213,7 +214,7 @@ void sort_number(Ticket * m)
 
 int write_into_txt(Ticket * m)
 {
-    FILE * f = fopen("ticket.txt", "a+");
+    FILE * f = fopen(TicketFile, "a+");
 
     if (f == NULL)
     {
@@ -246,7 +247,7 @@ unsigned expection(int f, int b, int g)
     for (int i = 0; i < 2; i++)
     {
         int up = 1, down = 1;
-        int times = array[i] < 10 ? array[i] - 5 : 5;
+        int times = i == 0 ? (array[i] < 10 ? array[i] - 5 : 5) : (array[i] < 4 ? array[i] - 2 : 2);
 
         for (int j = 1; j <= times; ++j)
         {
@@ -262,7 +263,7 @@ unsigned expection(int f, int b, int g)
 
 char * readAll(long * f_size)
 {
-    FILE * f = fopen("ticket.txt", "r+");
+    FILE * f = fopen(TicketFile, "r+");
 
     if (f == NULL)
     {
@@ -283,7 +284,7 @@ char * readAll(long * f_size)
 
 void writeAll(char * text, long f_size)
 {
-    FILE * f = fopen("ticket.txt", "a+");
+    FILE * f = fopen(TicketFile, "a+");
 
     if (f != NULL)
     {
