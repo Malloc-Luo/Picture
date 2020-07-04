@@ -40,14 +40,16 @@ def Read_from_xls():
     return infoList
 
 
-#写入数据库
+#Write into database/将信息写入数据库
+#param: information list
+#return: None
 def Write_into_DB(infoList: list):
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
     try :
-        #创建数据表
+        #Create table stu
         cursor.execute('CREATE TABLE IF NOT EXISTS stu(name VARCHAR(10) PRIMARY KEY, id CHAR(8), seat CHAR(2))')
-        #填充数据
+        #insert data
         for stu in infoList:
             cursor.execute('INSERT INTO stu(name, id, seat) VALUES (?, ?, ?)', ((stu['name'], stu['ID'], stu['seat'])))
     finally:
@@ -55,7 +57,9 @@ def Write_into_DB(infoList: list):
         conn.commit()
         conn.close()
 
-
+#read from database/从数据表中加载数据
+#param: None
+#return: information list of stu
 def Read_from_DB():
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()

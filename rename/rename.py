@@ -99,6 +99,7 @@ def getFileList(ex):
 def check(t):
     return ('name' in t) and (len(exName) != 0)
 
+#处理模板生成文件名
 def genFilename(stu):
     fname = ''
     for t in stdTemplate:
@@ -131,8 +132,9 @@ if __name__ == '__main__':
    
     template = getTemplate(input('输入模板:\n'))
     stdTemplate = tranTostd(template)
-    #检查模板断言
-    assert check(stdTemplate)
+    
+    if check(stdTemplate) == False:
+        raise Exception('模板中必须包含 姓名 项，且至少有一个扩展名')
 
     fileList = getFileList(exName)
 
