@@ -6,7 +6,6 @@ Created on Sat Sep 21 12:20:13 2019
 """
 
 import random as rd
-
 import os
 #import sys
 from functools import reduce
@@ -32,14 +31,10 @@ msg = ''
 result = []
 group = '土豆条电控水群'
 
-#os.system('qqbot')
-
-#def Rule(info = '\n分组方式（例如：332）\n\n\t: '):
-#	return list(map(int, list(input(info))))
-
 def SelfRule(rule):
 	while reduce(lambda a, b: a + b, rule) != len(Name):
-		rule = list(map(int, list(input('\n分组人数不对，请重新输~\n\n\t: '))))		
+		# rule = list(map(int, list(input('\n分组人数不对，请重新输~\n\n\t: '))))	
+        rule = [int(x) for x in input('\n分组人数不对，请重新输~\n\n\t: ')]        
 	for r in rule:
 		p = []
 		while len(p) < r:
@@ -49,11 +44,18 @@ def SelfRule(rule):
 		print(p)
 		result.append(p)
 	
-def d(name):
-	Name.remove(name)
+def d(* name):
+    for n in name:
+	    Name.remove(n)
 	
-def a(name):
-	Name.append(name)
+def a(* name):
+    for n in name:
+	    Name.append(n)
+        
+def PrintNameList():
+    print([x for x in Name if x != ' '])
+
+
 
 gameName = input('比赛叫什么名字？\n\t')	
 isLack = input('少人吗？[ y/ n/ 少/ 不少/ 多/]\n\t: ')
@@ -67,12 +69,14 @@ while isLack in ['y', '少', 'shao', 'sao', '烧', '骚', 'Y', '有', '一', '�
 		print(Name, '\n\n')
 		eval(input('\n名字好像打错了，重新来\n\n\t: '))
 	finally:
+        PrintNameList()
 		isLack = input('\n还少吗？\n\n\t: ')
 
 if ' ' in Name:
 	d(' ')
 	
-SelfRule(list(map(int, list(input('\n分组方式（例如： 332）\n\n\t: ')))))
+# SelfRule(list(map(int, list(input('\n分组方式（例如： 332）\n\n\t: ')))))
+SelfRule([int(x) for x in input('\n分组方式（例如： 332）\n\n\t: ')])
 
 for item in result:
     info = ' '.join(item)
@@ -80,9 +84,7 @@ for item in result:
 
 for u in MyUrl:
     rq.get('https://sc.ftqq.com/' + u + '.send', params = dict(text = title + '-' + gameName, desp = msg))
-
-#os.system('qq send group ' + group + ' ' + info)
-     
+ 
 input('\n\n已推送...')        
 
     
