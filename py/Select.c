@@ -38,7 +38,7 @@ void writeAll(char * buff, long f_size);
 int main()
 {
     int frontN = 0, backN = 0, groupN = 0;
-    long f_size = 0;   /*ÎÄ¼ş³¤¶È*/
+    long f_size = 0;   /*æ–‡ä»¶é•¿åº¦*/
     char cmd = 0, * text_buff = readAll(& f_size);
     char * current_path;
 
@@ -77,7 +77,7 @@ int main()
     unsigned money = expection(frontN, backN, groupN);
 
     FILE * f = fopen(TicketFile, "a+");
-    fprintf(f, "\n\n\tĞèÒª»¨·Ñ%dÔª", 2 * money);
+    fprintf(f, "\n\n\téœ€è¦èŠ±è´¹%då…ƒ", 2 * money);
     fclose(f);
 
     if (text_buff != NULL)
@@ -86,12 +86,12 @@ int main()
         free(text_buff);
     }
 
-    printf("\n\n\tĞèÒª»¨·Ñ%dÔª\n\n(°´'v'²é¿´ÎÄ¼ş ticket.txtÖĞ±£´æµÄ¼ÇÂ¼)\n\n", 2 * money);
+    printf("\n\n\téœ€è¦èŠ±è´¹%då…ƒ\n\n(æŒ‰'v'æŸ¥çœ‹æ–‡ä»¶ ticket.txtä¸­ä¿å­˜çš„è®°å½•)\n\n", 2 * money);
     current_path = getcwd(NULL, 0);
 
     if (current_path != NULL)
     {
-        printf("ÒÑ¼ÆÈëÎÄ¼şÖÁ%s\\ticket.txt\n", current_path);
+        printf("å·²è®¡å…¥æ–‡ä»¶è‡³%s\\ticket.txt\n", current_path);
         free(current_path);
     }
     getchar();
@@ -156,7 +156,7 @@ struct tm get_time()
 }
 
 /*
- * ÕÒµ½ÁË·µ»Ø1£¬·ñÔò·µ»Ø0
+ * æ‰¾åˆ°äº†è¿”å›1ï¼Œå¦åˆ™è¿”å›0
  */
 int findin(unsigned * array, int len, int n)
 {
