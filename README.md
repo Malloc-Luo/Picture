@@ -1,5 +1,7 @@
 master comment
 
+master comment2
+
 ### 梦想当一个图床，现在变成了作业托管平台
 
 * [图片](https://github.com/Malloc-Luo/Picture/tree/master/1)  
