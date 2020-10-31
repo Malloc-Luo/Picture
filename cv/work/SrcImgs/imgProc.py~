@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+import cv2 as cv 
+import numpy as np
+
+
+class Image(object):
+
+    def __init__(self, path):
+        pass
+
+
+
+def Get_Image(path: str) -> np.array:
+
+    assert type(path) == 'str'
+
+
+
+if __name__ == '__main__':
+    pass
+
